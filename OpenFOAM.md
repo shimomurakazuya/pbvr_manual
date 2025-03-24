@@ -1,4 +1,4 @@
-# OpenFOAMへのpbvr組み込み
+![image](https://github.com/user-attachments/assets/d0d1d03e-c9b0-4cb7-9962-36c9455f3692)# OpenFOAMへのpbvr組み込み
 
 OpenFOAMにpbvr付属のアダプターを挿入することで、OpenFOAMソルバーが可視化用粒子を生成できるようになる、このアダプターはFilterディレクトリに格納されており、粒子サンプラ同様、粒子生成ライブラリを参照、リンクすることで使用可能となる。アダプターは計算された物理値の変数配列をvtkライブラリを用いてvtkUnstructuredGridクラスに変換し、粒子サンプラへと引き渡す。
 以下ではPBVRに付属したOpenFOAMのサンプルコードを動作させる手順を示す。
@@ -123,9 +123,32 @@ export  PARTICLE_DIR=($install_dir_pbvr)/CS-IS-PBVR/IS_DaemonAndSampler/Example
 mkdir particle_out
 ```
 
-OpenFOAMソルバーの実行
-% ./RESET.sh (粒子データがある場合、要実行)
-%mpirun –n 2  icoFoam –parallel
+これでソルバー実行の準備が整ったので、OpenFOAMソルバーを実行する。
+
+```
+mpirun –n 2  icoFoam –parallel
+```
+
+### サンプルコードについて
+
+### icoFoam.CへのPBVR関数組込＆出力間隔制御事例
+
+ここではicoFoam.CへのPBVR関数組込と出力間隔制御の事例を説明する。
+
+必要な#include ファイルについてはコードを直接参照されたし。
+
+アダプターはOpenFOAMと同様、インクルードファイルを挿入する方式を採用している。図のように指定のフィルターファイル（赤線）を展開することで、PBVR関数を呼び出している。
+
+![スクリーンショット 2025-03-24 15 59 02](https://github.com/user-attachments/assets/7aaf48ca-8f5f-4213-b7cb-b0d05e18018f)
+
+アダプターには2種類あり、polyhedronタイプと混合要素タイプがある。混合要素タイプの方はcellModel Classに含まれるHEX, WEDGE、PRISM,　PYRタイプのセルのみ可視化可能だが処理速度が早い。一方で、polyhedronタイプはセルをそのまま扱えるので対応範囲が広い。
+
+後述する使用方法について2つに違いはないが、混ぜ合わせて使用するとエラーの原因となるので、どちらか一方のみを使用するよう注意されたし。
+
+混合要素タイプ　Conversion_from_OpenFOAM_to_vtk_initialstep.h   Conversion_from_OpenFOAM_to_vtk_laterstep.h 
+多面体タイプ　Conversion_from_OpenFOAM_to_vtkpolyhedron_initialstep.h Conversion_from_OpenFOAM_to_vtkpolyhedron_laterstep.h 
+
+２種類のアダプターは初回宣言時には(***initial_step** )がついた.hファイルを、2回目以降は(***later_step***)が付いた.hファイルを使用する。
 
 
 
