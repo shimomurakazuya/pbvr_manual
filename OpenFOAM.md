@@ -9,11 +9,11 @@ OpenFOAMにpbvr付属のFoamToPbvrアダプターを挿入することで、Open
 
 【モジュール】　gnu/9.5.0　 openmpi/4.1.4 
 
-【OpenFOAM】　10（財団版）(プリインストール済)
+【OpenFOAM】　10（財団版）(プリインストール済 ``/home/app/OpenFOAM/OpenFOAM-10``)
 
 【サンプルコード名】 cavity flow 
 
-【vtk】 v9.2　(プリインストール済)
+【vtk】 v9.2　(プリインストール済 ``/home/center/viztools/VTK-9.2.2``)
 
 【shell】 bash
 
