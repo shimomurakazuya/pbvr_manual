@@ -167,10 +167,10 @@ cd ($install_dir_pbvr)/CS-IS-PBVR/IS_DaemonAndSampler/Daemon
 サンプルコードの可視化結果は以下の図の通りである。この時の可視化パラメータを以下に記載する。
 
  <p align="center">
- <img src="https://github.com/user-attachments/assets/41439857-23fd-4a5c-a570-9ffe1294538c" alt="workload" width=80%>
+ <img src="https://github.com/user-attachments/assets/9f9eb7b6-2bd8-4217-8a31-3d12e057a8da" alt="workload" width=80%>
  </p>
 
-* 時間ステップ: 10 
+* 時間ステップ: 300（定常状態）
 
 Transfer function
 * Color Function Synthesizer : C1
