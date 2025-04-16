@@ -1,7 +1,7 @@
-# OpenFOAMへのpbvr組み込み
+# OpenFOAMの都市風況サンプルコードの可視化手順
 
 OpenFOAMにpbvr付属のFoamToPbvrアダプターを挿入することで、OpenFOAMソルバーが可視化用粒子を生成できるようになる、このアダプターはFilterディレクトリに格納されており、粒子サンプラ同様、粒子生成ライブラリを参照、リンクすることで使用可能となる。アダプターは計算された物理値の変数配列をvtkライブラリを用いてvtkUnstructuredGridクラスに変換し、粒子サンプラへと引き渡す。
-以下ではPBVRに付属したOpenFOAMのサンプルコードの動作手順を示す。
+以下ではPBVRに付属したOpenFOAMの都市風況サンプルコードの動作手順を示す。
 
 ## 環境設定
 
@@ -9,7 +9,7 @@ OpenFOAMにpbvr付属のFoamToPbvrアダプターを挿入することで、Open
 
 【モジュール】　gnu/9.5.0　 openmpi/4.1.4 
 
-【OpenFOAM】　10（財団版）(プリインストール済 ``/home/app/OpenFOAM/OpenFOAM-10``)
+【OpenFOAM】　v2206（esi版）(プリインストール済 ``/home/app/OpenFOAM/OpenFOAM-v2206``)
 
 【サンプルコード名】 cavity flow 
 
