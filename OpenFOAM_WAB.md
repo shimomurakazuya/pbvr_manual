@@ -30,7 +30,7 @@ module purge; module load gnu/9.5.0　openmpi/4.1.4
 インストールディレクトリにて、git cloneを実施する。
 
 ```
-git clone git@github.com:CCSEPBVR/CS-IS-PBVR.git -b release_v3.3.0
+git clone git@github.com:CCSEPBVR/CS-IS-PBVR.git 
 ```
 
 
@@ -59,43 +59,49 @@ OpenFOAMにてpbvrのライブラリを用いるために、コンパイル設�
 OpenFOAMのインストールディレクトリのパスを($install_dir_foam)とすると、コピーコマンドは以下の通り、
 
 ```
-cp -r /home/app/OpenFOAM/OpenFOAM-10  ($install_dir_foam)
-cp -r /home/app/OpenFOAM/ThirdParty-10  ($install_dir_foam)
+rsync -r /home/app/OpenFOAM/OpenFOAM-v2206  ($install_dir_foam)
+rsync -r /home/app/OpenFOAM/ThirdParty-v2206  ($install_dir_foam)
 ```
 
-コピーできたら、図の赤線部分のように($install_dir_foam)/OpenFOAM-10/etc/bashrcのFOAM_INST_DIRを($install_dir_foam)とし、環境変数WM_COMPIKERをGccに変更する。
+コピーできたら、図の赤線部分のように($install_dir_foam)/OpenFOAM-v2206/etc/bashrcのprojectDirを($install_dir_foam)とし、環境変数WM_COMPIKERをGccに変更する。
 
  <p align="center">
- <img src="https://github.com/user-attachments/assets/ce5a7ff5-3d5e-4929-94f3-d60255144f41" alt="workload" width=40%>
+ <img src="https://github.com/user-attachments/assets/38d629a2-1ef1-42d3-b20b-b6870642adb9" alt="workload" width=40%>
  </p>
+
+
 
 
 ここから、OpenFOAMコマンドを有効化する。まず、一度/etc/bashrcを実行する。
 ```
-source ($install_dir_foam)/OpenFOAM-10/etc/bashrc
+source ($install_dir_foam)/OpenFOAM-v2206/etc/bashrc
 ```
 
 OpenFOAMディレクトリ内の./Allwmakeを実行する。
 
 ```
-cd OpenFOAM-10
+cd OpenFOAM-v2206
 ./Allwmake
 ```
 
 /etc/bashrcを再び実行することで有効化準備は完了。以下のコマンドでヘルプログが出たら有効化されている。
 
 ```
-source ($install_dir_foam)/OpenFOAM-10/etc/bashrc
+source ($install_dir_foam)/OpenFOAM-v2206/etc/bashrc
 icoFOAM –help 
 ```
 
 ### OpenFOAMのコンパイル設定変更
 
-コンパイル設定ファイル(``$install_dir_foam)/OpenFOAM-10/wmake/rules/linux64Gcc/c++``)にてコンパイルコマンド部分( CC = … )を図のように変更する。
+コンパイル設定ファイル(``($install_dir_foam)/wmake/rules/General/Gcc/c++``)にてコンパイルコマンド部分( CC = … )を図のように変更する。
+```
+CC          = mpic++$(COMPILER_VERSION) -std=c++14 -m64 -pthread -fopenmp
+```
 
  <p align="center">
- <img src="https://github.com/user-attachments/assets/465930e1-b080-41e9-82e7-afddfe8604fb" alt="workload" width=60%>
+ <img src="https://github.com/user-attachments/assets/0ec04535-b3e0-4fc7-b727-0ad440d225af" alt="workload" width=60%>
  </p>
+
 
 ### OpenFOAMのコンパイルオプション変更
 
@@ -116,10 +122,10 @@ OpenFOAM用サンプルコードディレクトリ(ここではIS_DaemonAndSampl
 wmake -j
 ```
 
-前処理として、メッシュ生成コマンドを実行する。
+前処理として、メッシュ生成スクリプト、コマンドを実行する。
 
 ```
-blockMesh
+./Allrun.pre 
 decomposePar
 ```
 ## コードの実行
@@ -127,8 +133,8 @@ decomposePar
 In-Situセットアップの通りに環境変数を設定する。
 
 ```
-export VIS_PARAM_DIR=($install_dir_pbvr)/CS-IS-PBVR/IS_DaemonAndSampler/Example/C/gcc_mpi_omp/cavity_flow_vtk
-export  PARTICLE_DIR=($install_dir_pbvr)/CS-IS-PBVR/IS_DaemonAndSampler/Example/C/gcc_mpi_omp/cavity_flow_vtk/particle_out
+export VIS_PARAM_DIR=($install_dir_pbvr)/CS-IS-PBVR/IS_DaemonAndSampler/Example/C/gcc_mpi_omp/windAroundBuildings_v2206
+export  PARTICLE_DIR=($install_dir_pbvr)/CS-IS-PBVR/IS_DaemonAndSampler/Example/C/gcc_mpi_omp/windAroundBuildings_v2206/particle_out
 ```
 
 粒子データ用ディレクトリとしてparticle_outを作成する。
@@ -139,7 +145,7 @@ mkdir particle_out
 これでソルバー実行の準備が整ったので、OpenFOAMソルバーを実行する。サンプルコードとしてicoFoam.Cを使用しているので実行コマンドは以下の通り。
 
 ```
-mpirun –n 2 icoFoam –parallel
+mpirun –n 2 simpleFoam –parallel
 ```
 
 ## デーモンコードの実行
@@ -149,8 +155,8 @@ mpirun –n 2 icoFoam –parallel
 デーモンコードのビルド作業は、ソルバービルド時に同時に行っているため省略する。実行前に環境変数として、以下の２つを設定する。
 
 ```
-export VIS_PARAM_DIR=($install_dir_pbvr)/CS-IS-PBVR/IS_DaemonAndSampler/Example/C/gcc_mpi_omp/cavity_flow_vtk
-export  PARTICLE_DIR=($install_dir_pbvr)/CS-IS-PBVR/IS_DaemonAndSampler/Example/C/gcc_mpi_omp/cavity_flow_vtk/particle_out
+export VIS_PARAM_DIR=($install_dir_pbvr)/CS-IS-PBVR/IS_DaemonAndSampler/Example/C/gcc_mpi_omp/windAroundBuildings_v2206
+export  PARTICLE_DIR=($install_dir_pbvr)/CS-IS-PBVR/IS_DaemonAndSampler/Example/C/gcc_mpi_omp/windAroundBuildings_v2206/particle_out
 ```
 
 Daemonディレクトリに移動し、pbvr_daemonを実行する。
