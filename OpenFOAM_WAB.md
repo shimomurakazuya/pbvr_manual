@@ -145,7 +145,7 @@ mkdir particle_out
 これでソルバー実行の準備が整ったので、OpenFOAMソルバーを実行する。サンプルコードとしてicoFoam.Cを使用しているので実行コマンドは以下の通り。
 
 ```
-mpirun –n 2 simpleFoam –parallel
+mpirun -n 2 simpleFoam -parallel
 ```
 
 ## デーモンコードの実行
@@ -173,21 +173,22 @@ cd ($install_dir_pbvr)/CS-IS-PBVR/IS_DaemonAndSampler/Daemon
 サンプルコードの可視化結果は以下の図の通りである。この時の可視化パラメータを以下に記載する。
 
  <p align="center">
- <img src="https://github.com/user-attachments/assets/9f9eb7b6-2bd8-4217-8a31-3d12e057a8da" alt="workload" width=80%>
+ <img src="https://github.com/user-attachments/assets/7296e490-dcf8-40e8-b6b5-b525f7ac33fa" alt="workload" width=80%>
  </p>
 
-* 時間ステップ: 300（定常状態）
+
+* 時間ステップ: 100（定常状態）
 
 Transfer function
 * Color Function Synthesizer : C1
 * Opacity Function Synthesizer : O1
-* Color Map Function [C1] : f(q1)
-* Opacity Map Function[O1] : f(q1)
-* minmax mode: server size Min Max
+* Color Map Function [C1] : $dq1x \cdot dq2y + dq2y \cdot dq3z + dq3z \cdot dq1x - dq1y \cdot dq2x - dq2z \cdot dq3y - dq3x \cdot dq1z$
+* Opacity Map Function[O1] : $dq1x \cdot dq2y + dq2y \cdot dq3z + dq3z \cdot dq1x - dq1y \cdot dq2x - dq2z \cdot dq3y - dq3x \cdot dq1z$
+* minmax mode: User defined Min Max
 
 グリフ
-* scale factor : 0.1
-* Distribution mode: AllPoints
+* scale factor : 15
+* Distribution mode: Uniform Distribution
 * Size: constant
 * Color : Variables Array
   * Number of variables: 3
@@ -198,22 +199,22 @@ Transfer function
 plot over line 
 * Resolution:256
 * Target: q1
-* Start point: (0.5, 0, 0.05)
-* End point: (0.5, 1, 0.05) 
+* Start point: (-20, 160, 50)
+* End point: (350, 160, 50) 
 
 ## サンプルコードについて
 
 ### 計算内容
 
-このサンプルコードの計算内容は2次元cavity flowである。z方向は周期境界条件を課して一様としている。
+このサンプルコードの計算内容は3次元空間における都市まわりの風況シミュレーション(WindAroundBuilding)である。x方向に（手前側の境界面から）風が流入している。
 
-計算パラメータは以下の通りである。
+計算パラメータは以下の通りである。粒子はQ値、グリフは風速の大きさ、plot over line は風速のx成分分布を示す
 * MPI並列数: 2MPI
-* 上壁面速度(m/s): 1
-* セル数(n_x, n_y, n_z): 400(20, 20, 1)
-* セルタイプ:hexahedra
-* 計算領域(L_x, L_y, L_z): (1, 1, 0.5)
-* レイノルズ数(動粘性係数): 100
+* 流入速度(m/s): 10
+* セル数: 185,237
+* セルタイプ:hexahedra, pyramid, polyhedron
+* 計算領域(L_x, L_y, L_z): (350,280,140)
+* レイノルズ数(動粘性係数): 2.33e8(0.00001)
 
 
 ### インクルードファイルについて
