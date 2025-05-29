@@ -11,7 +11,7 @@ OpenFOAMにpbvr付属のFoamToPbvrアダプターを挿入することで、Open
 
 【OpenFOAM】　v2206（esi版）(プリインストール済 ``/home/app/OpenFOAM/OpenFOAM-v2206``)
 
-【サンプルコード名】 cavity flow 
+【サンプルコード名】 wind around building 
 
 【vtk】 v9.2　(プリインストール済 ``/home/center/viztools/VTK-9.2.2``)
 
@@ -182,8 +182,8 @@ cd ($install_dir_pbvr)/CS-IS-PBVR/IS_DaemonAndSampler/Daemon
 Transfer function
 * Color Function Synthesizer : C1
 * Opacity Function Synthesizer : O1
-* Color Map Function [C1] : $dq1x \cdot dq2y + dq2y \cdot dq3z + dq3z \cdot dq1x - dq1y \cdot dq2x - dq2z \cdot dq3y - dq3x \cdot dq1z$
-* Opacity Map Function[O1] : $dq1x \cdot dq2y + dq2y \cdot dq3z + dq3z \cdot dq1x - dq1y \cdot dq2x - dq2z \cdot dq3y - dq3x \cdot dq1z$
+* Color Map Function [C1] : $dq1x * dq2y + dq2y * dq3z + dq3z * dq1x - dq1y * dq2x - dq2z * dq3y - dq3x * dq1z$
+* Opacity Map Function[O1] : $dq1x * dq2y + dq2y * dq3z + dq3z * dq1x - dq1y * dq2x - dq2z * dq3y - dq3x * dq1z$
 * minmax mode: User defined Min Max
 
 グリフ
