@@ -253,8 +253,10 @@ plot over line
 ### MPI並列数の変更方法
 
 ここではサンプルコードのMPI並列数を変更する手順について説明する。
-MPI並列数をNに変更したい場合、前処理の段階からやり直す必要がある。``system/decomposeParDict`` の　``numberOfSubdomains``の数値をnに変更し、./Allrun.preを再実行する。
+MPI並列数をNに変更したい場合、前処理の段階からやり直す必要がある。``system/decomposeParDict`` の　``numberOfSubdomains``の数値をNに変更し、
+下記のように、``N = x*y*z``が成り立つようにsimpleCoeffsの値を設定する。
 
+変更後、Allrun.preを再実行する。
 （この時、前処理のlogファイル(log....)を削除しておく必要がある）
 
 ```
@@ -280,7 +282,7 @@ MPI並列数をNに変更したい場合、前処理の段階からやり直す�
  20 
  21 simpleCoeffs
  22 {
- 23   n ( 2 1 1 );
+ 23   n ( x y z );　← 三つの数字の積がNに等しくなるように設定
  24   delta 0.001;
  25 }
  26 
