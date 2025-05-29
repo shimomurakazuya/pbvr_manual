@@ -177,7 +177,7 @@ cd ($install_dir_pbvr)/CS-IS-PBVR/IS_DaemonAndSampler/Daemon
  </p>
 
 
-* 時間ステップ: 100（定常状態）
+* 時間ステップ: 400（定常状態）
 
 Transfer function
 * Color Function Synthesizer : C1
