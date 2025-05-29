@@ -229,7 +229,7 @@ plot over line
 
 ここではsimpleFoam.CへのPBVR関数組込と出力間隔制御の事例を説明する。
 
-アダプターはOpenFOAMと同様、インクルードファイルを挿入する方式を採用している。図のように指定のフィルターファイル（赤線）を展開することで、PBVRの関数を呼び出している。（詳細は後述）
+アダプターはOpenFOAMと同様、インクルードファイルを挿入する方式を採用している。図のように指定のフィルターファイルを展開することで、PBVRの関数を呼び出している。（詳細は後述）
 
  <p align="center">
  <img src="https://github.com/user-attachments/assets/f7e5f588-3dcd-436d-88cf-1f6acd4c3c66" alt="workload" width=40%>
