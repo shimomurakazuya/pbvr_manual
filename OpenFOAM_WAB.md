@@ -209,7 +209,7 @@ plot over line
 このサンプルコードの計算内容は3次元空間における都市まわりの風況シミュレーション(WindAroundBuilding)である。x方向に（手前側の境界面から）風が流入している。
 
 計算パラメータは以下の通りである。粒子はQ値、グリフは風速の大きさ、plot over line は風速のx成分分布を示す
-* MPI並列数: 2MPI
+* MPI並列数: 2MPI (並列数を変更したい場合は[後述](#MPI並列数の変更方法)を参照)
 * 流入速度(m/s): 10
 * セル数: 185,237
 * セルタイプ:hexahedra, pyramid, polyhedron
@@ -225,9 +225,9 @@ plot over line
 
 上図はあくまで一例であり、必要なファイルはソルバーによって変化する。
 
-### icoFoam.CでのPBVR関数組込＆出力間隔制御
+### simpleFoam.CでのPBVR関数組込＆出力間隔制御
 
-ここではicoFoam.CへのPBVR関数組込と出力間隔制御の事例を説明する。
+ここではsimpleFoam.CへのPBVR関数組込と出力間隔制御の事例を説明する。
 
 アダプターはOpenFOAMと同様、インクルードファイルを挿入する方式を採用している。図のように指定のフィルターファイル（赤線）を展開することで、PBVRの関数を呼び出している。（詳細は後述）
 
@@ -235,13 +235,10 @@ plot over line
  <img src="https://github.com/user-attachments/assets/f7e5f588-3dcd-436d-88cf-1f6acd4c3c66" alt="workload" width=40%>
  </p>
 
-アダプターには2種類あり、polyhedronタイプと混合要素タイプがある。混合要素タイプの方はOpenFOAM のcellModel Classに含まれるHEX, WEDGE、PRISM,　PYRタイプのセルのみ可視化可能だが処理速度が早い。一方で、polyhedronタイプはセルをそのまま扱えるので対応範囲が広い。
-
-後述する使用方法について2つに違いはないが、混ぜ合わせて使用するとエラーの原因となるので、どちらか一方のみを使用するよう注意されたし。
+アダプターには2種類あり、polyhedronタイプと混合要素タイプがある。ただし、このサンプルコードではpolyhedronタイプのみ使用可能。
 
 | 対応タイプ       | ファイル名                                                             |
 |-----------------|------------------------------------------------------------------|
-| 混合要素タイプ    | Conversion_from_OpenFOAM_to_vtk_***.h    |
 | 多面体タイプ　    | Conversion_from_OpenFOAM_to_vtkpolyhedron_***.h      |
 
 アダプターは初回使用時には(**initial_step** )がついた.hファイルを、2回目以降は(**later_step**)が付いた.hファイルを使用する。
@@ -252,6 +249,48 @@ plot over line
 このアダプターはvtkライブラリ関数を用いて、OpenFOAM形式の座標、接続情報、変数データを粒子サンプラが対応しているvtk形式に変換を行うものである。
 変数データについては毎出力ステップ毎に変換処理を行うが、座標、接続情報データに関しては初回出力ステップのみ変換処理を行い、処理コストを削減している。
 また、変換処理の際にセルデータからポイントデータへの変換処理も行なっている。
+
+### MPI並列数の変更方法
+
+ここではサンプルコードのMPI並列数を変更する手順について説明する。
+MPI並列数をNに変更したい場合、前処理の段階からやり直す必要がある。``system/decomposeParDict`` の　``numberOfSubdomains``の数値をnに変更し、./Allrun.preを再実行する。
+
+（この時、前処理のlogファイル(log....)を削除しておく必要がある）
+
+```
+  1 /*--------------------------------*- C++ -*----------------------------------*\
+  2 | =========                 |                                                 |
+  3 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+  4 |  \\    /   O peration     | Version:  v2206                                 |
+  5 |   \\  /    A nd           | Website:  www.openfoam.com                      |
+  6 |    \\/     M anipulation  |                                                 |
+  7 \*---------------------------------------------------------------------------*/
+  8 FoamFile
+  9 {
+ 10     version     2.0;
+ 11     format      ascii;
+ 12     class       dictionary;
+ 13     object      decomposeParDict;
+ 14 }
+ 15 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+ 16 
+ 17 numberOfSubdomains N;   ←この数字
+ 18 
+ 19 method          simple;
+ 20 
+ 21 simpleCoeffs
+ 22 {
+ 23   n ( 2 1 1 );
+ 24   delta 0.001;
+ 25 }
+ 26 
+```
+
+その後、コードの実行コマンドを並列数nで入力する。
+
+```
+mpirun -n N simpleFoam -parallel
+```
 
 
 ### 可視化用変数を増やす手順
