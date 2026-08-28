@@ -1,35 +1,24 @@
 # アンサンブル伝達関数エディタ                                                                                                                                                                                 
 アンサンブル伝達関数エディタでは、伝達関数エディタと同様に物理値の統計量に割り当てられる色および不透明度を定義する伝達関数が作成できる。
 
-
-
-通常のボリュームレンダリングでは伝達関数は1つの物理量のみによって定義されるがPBVRでは
-
-1. 色と不透明度に独立な変量を割り当てる。
-1. 各変量を座標X、Y、Z、変量q1、q2、q3...の任意の関数式で定義
-1. 1次元伝達関数の色関数をC1、C2、...、不透明度関数をO1、O2、...で定義し、さらにそれら任意の関数式で合成して多次元伝達関数を定義
-
-という、新たな伝達関数設計を可能にしたことで、極めて自由度の高い可視化処理を実現した。
 <p align="center">
-<img src="img/EnsembleTransferFunctionEditor/" alt="workload" width=100%>
+<img src="img/EnsembleTransferFunctionEditor/スクリーンショット 2026-08-28 16.53.47.png" alt="workload" width=50%>
 </p>
 
-- **Number of Transfer Functions**:作成可能な伝達関数の制限数を指定する。
+- **Variable**: 計算する統計量の関数式を指定する。
+- **Statistic**: 可視化する統計量を指定する。
 - **Exportボタン**:作成した伝達関数をファイルに保存する
 - **Importボタン**:作成した伝達関数ファイルを読み込む
 - **Applyボタン**:作成した伝達関数ファイルを適用する
 
-## Color Functionカテゴリ
-- **Synthesizer**:色関数C1~C[N]による合成式を指定する※1
-- **Function**:編集する色関数C1~C[N]を選択する
-- **...ボタン**:Color Function Editorを表示して選択中の色関数C1~C[N]の引数となる合成変量を作成する
+## Ensemble Transfer Functionカテゴリ
+- **colorMap**:C1~C[N]による合成式を指定する※1
+- **opacityMap**:編集する色関数C1~C[N]を選択する
+
 
 ## Color Mapカテゴリ
-- **C[N] Min:Max**: 合成変量に対して、色関数を割り当てる最小最大値を指定する
-- **C[N] Server side Range Min:Max**: 合成変量の最小最大値を表示する
-- **同期ボタン**:有効時、強制的にC[N]Server side Range Min:Maxの値が採用される。
-- **Edit Color Map**:選択中の色関数に対するカラーマップを作成するためのColor Map Editorを開く
-- **ヒストグラム**:C[N]Min:Maxで指定した最小最大値の範囲のヒストグラムが表示される
+Color Map Editor　を用いて統計量粒子の色付け設定を行う。
+使い方は[Color Map Editor](##Color_Map_Editor)参照
 
 ## Opacity Functionカテゴリ
 - **Synthesizer**:不透明度関数O1~O[N]による合成式を指定する※1
