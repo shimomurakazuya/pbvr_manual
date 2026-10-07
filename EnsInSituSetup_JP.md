@@ -76,19 +76,19 @@ result = ensemble_generate_particles( time_step, ens_num, dom,
 
 ## サンプルコードの可視化結果
 
-###平均
+### 平均
 <p align="center">
-<img src="" alt="workload" width=60%>
+<img src="https://github.com/shimomurakazuya/pbvr_manual/blob/main/img/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-07-22%2014.47.40.png" alt="workload" width=60%>
 </p>
 
-###分散
+### 分散
 <p align="center">
-<img src="" alt="workload" width=60%>
+<img src="https://github.com/shimomurakazuya/pbvr_manual/blob/main/img/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-07-22%2014.52.03.png" alt="workload" width=60%>
 </p>
 
-###変動係数
+### 変動係数
 <p align="center">
-<img src="" alt="workload" width=60%>
+<img src="https://github.com/shimomurakazuya/pbvr_manual/blob/main/img/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-07-22%2014.53.51.png" alt="workload" width=60%>
 </p>
 
                                                                                                             
