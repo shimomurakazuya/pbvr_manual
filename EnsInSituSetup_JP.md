@@ -47,13 +47,28 @@ result = ensemble_generate_particles( time_step, ens_num, dom,
 各アンサンブルのメンバ数が大きくなるほど値は増大し、分布は縦に圧縮されるような分布。
 以下はアンサンブル数が0~4の画像でである。
 
-（画像１）
+0アンサンブル
+<p align="center">
+<img src="https://github.com/shimomurakazuya/pbvr_manual/blob/main/img/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%AF%E3%82%99ens0_rl27%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-07-13%2015.21.28.png" alt="0アンサンブル" width=60%>
+</p>
 
-（画像2）
 
-（画像3）
+1アンサンブル
+<p align="center">
+<img src="https://github.com/shimomurakazuya/pbvr_manual/blob/main/img/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%AF%E3%82%99ens1_rl27%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-07-13%2015.21.07.png" alt="1アンサンブル" width=60%>
+</p>
 
-（画像4）
+
+2アンサンブル
+<p align="center">
+<img src="https://github.com/shimomurakazuya/pbvr_manual/blob/main/img/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%AF%E3%82%99ens2_rl27%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-07-13%2015.20.48.png" alt="2アンサンブル" width=60%>
+</p>
+
+
+3アンサンブル
+<p align="center">
+<img src="https://github.com/shimomurakazuya/pbvr_manual/blob/main/img/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%AF%E3%82%99ens3_rl27%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-07-13%2015.22.34.png" alt="3アンサンブル" width=60%>
+</p>
 
 ### コンパイル方法
 
@@ -61,9 +76,19 @@ result = ensemble_generate_particles( time_step, ens_num, dom,
 
 ## サンプルコードの可視化結果
 
+###平均
 <p align="center">
 <img src="" alt="workload" width=60%>
 </p>
 
+###分散
+<p align="center">
+<img src="" alt="workload" width=60%>
+</p>
+
+###変動係数
+<p align="center">
+<img src="" alt="workload" width=60%>
+</p>
 
                                                                                                             
