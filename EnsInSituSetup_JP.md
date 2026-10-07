@@ -62,7 +62,7 @@ result = ensemble_generate_particles( time_step, ens_num, dom,
 ## サンプルコードの可視化結果
 
 <p align="center">
-<img src="img/OpenFOAM/OpenFOAM_10.png" alt="workload" width=60%>
+<img src="" alt="workload" width=60%>
 </p>
 
 
