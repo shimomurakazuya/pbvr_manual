@@ -12,9 +12,13 @@
 - **Applyボタン**:作成した伝達関数ファイルを適用する
 
 ## Ensemble Transfer Functionカテゴリ
-- **colorMap**:C1~C[N]による合成式を指定する※1
-- **opacityMap**:編集する色関数C1~C[N]を選択する
+- **colorMap**:variableにて指定された式の統計量に色付けするカラーマップを表示している。ダブルクリックでColor Map Editorを開く
+- **opacityMap**:variableにて指定された式に対するオパシティマップを表示している。ダブルクリックでColor Map Editorを開く
+- **Histogram**: EnsembleMinMaxカテゴリにて指定した最小最大値の範囲のヒストグラムが表示される
 
+## Ensemble MinMax カテゴリ
+- **User Defined MinMax**: Variableにて指定された式に対して、色関数/不透明度関数を割り当てる最小最大値を指定する 
+- **Server Side MinMax**: Variableにて指定された式の統計量の最小最大値を表示する
 
 ## Color Mapカテゴリ
 Color Map Editor　を用いて統計量粒子の色付け設定を行う。
