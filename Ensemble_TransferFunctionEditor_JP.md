@@ -7,19 +7,22 @@
 
 - **Variable**: 計算する統計量の関数式を指定する。
 - **Statistic ボックス**: 可視化する統計量 または アンサンブルメンバ を指定する。
-- **Log10 Scale (mean/varience) チェックボックス**: 統計量を常用対数表示するかしないかを切り替える。
-- **Output Menber Particle チェックボックス**: 各アンサンブルデータの出力するかしないかを切り替える。
+- **Log10 Scale (Mean / Variance) チェックボックス**: 統計量を常用対数表示するかしないかを切り替える。
+- **Output Member Particles チェックボックス**: 各アンサンブルデータの出力するかしないかを切り替える。
 - **Exportボタン**:作成した伝達関数をファイルに保存する
 - **Importボタン**:作成した伝達関数ファイルを読み込む
-- **Applyボタン**:作成した伝達関数ファイルを適用する
+- **Applyボタン**:エディタの現在の設定をサーバー側へ反映する
 
 ※ **Variable**で指定できる変数、演算子については[Opacity Function Editor](##Opacity_Function_Editor), [関数エディタ](##関数エディタ)参照
 
 ## 可視化表示する統計量の選択方法
- 関数式にて計算される統計量は平均(average)、分散(varience)、変動係数(coefficient of variation)の3種類である。表示したい統計量について、Statisticボックスから選択し、applyボタンを押すことで設定が反映される。
+ 関数式にて計算される統計量は平均(average)、分散(varience)、変動係数(coefficient of variation)の3種類である。表示したい統計量について、Statisticボックスから選択し、applyボタンを押すことで設定が反映され、次に粒子が生成されたステップから表示される。
 
 ## 各アンサンブルメンバの指定方法
- 各アンサンブルメンバを表示したい場合は Statisticボックスの"member"を選択し、隣のスピンボックスにてidを入力し、applyボタンを押すことで表示される。
+ 各アンサンブルメンバを表示したい場合は Statisticボックスの"member"を選択する。すると、隣のスピンボックスが有効かされるので、idを入力する。画像における"2/3" について、"2"の部分が現在選択しているメンバidで、"3"が最大メンバidである。選択後、applyボタンを押すことで表示される。ただし、Output Member Particlesが**OFF**の場合またはOFFにしていたタイムステップをMain windowで指定した場合、出力データ自体がないため何も表示されないことに注意。出力の切り替えは後述。
+ 
+## 各アンサンブルメンバの出力切り替え
+ Output Member Particles チェックボックスをON にしてapplyボタンを押すと、各アンサンブルメンバが出力されるようになる。各メンバの出力処理が加わるため、反映までの全体の処理時間が長くなる。
 
 ## 常用対数表示の切り替え
  Variableでは、常用対数の数式に対応している。ただし、これを用いた場合常用対数を用いた値での統計量（アンサンブル間で幾何平均を対数化した値）を表示し、算術平均を対数化した値ではない。
@@ -39,8 +42,8 @@ f = q1　かつLog10 Scale　ボタンON
 
 
 ## Ensemble Transfer Functionカテゴリ
-- **colorMap**:variableにて指定された式の統計量に色付けするカラーマップを表示している。ダブルクリックでColor Map Editorを開く
-- **opacityMap**:variableにて指定された式に対するオパシティマップを表示している。ダブルクリックでColor Map Editorを開く
+- **ColorMap**:variableにて指定された式の統計量に色付けするカラーマップを表示している。ダブルクリックでColor Map Editorを開く
+- **OpacityMap**:variableにて指定された式に対するオパシティマップを表示している。ダブルクリックでOpacity Map Editorを開く
 - **Histogram**: EnsembleMinMaxカテゴリにて指定した最小最大値の範囲のヒストグラムが表示される
 
 ※ Color Map Editor の 使い方は[Color Map Editor](##Color_Map_Editor)参照  
