@@ -14,28 +14,32 @@
 #include "kvs_wrapper.h"
 #include "kvs_wrapper_common.h"
 
-domain_parameters_unstruct dom ※ 可視化領域
+    domain_parameters_unstruct dom ※ 可視化領域
+
     float**        values;//[nvariables][nnodes] ※変数配列、変数の数 * ノード数　の二次元行列 
     unsigned int*  connections;  ※ 接続情報　
     float*         coords;　※ 座標　
     int            ncells;　※ セル数
     int            nnodes;　※ ノード数
     int            nvariables;　※ 変数の数
-    int            ens_num; ※ アンサンブル数
-    int 　　　　　　time_step; ※ 　タイムステップ
+    int            ens_num; ※ アンサンブルメンバ数
+    int            time_step; ※ 　タイムステップ
 
 ...(計算処理)...
 
 result = ensemble_generate_particles( time_step, ens_num, dom,
                        values, nvariables,
                        coords, nnodes,
-                       connections, ncells, vismodule::VolumeObjectBase::CellType::(hoge) );
+                       connections, ncells, vismodule::VolumeObjectBase::CellType::Hexahedra (計算するセルタイプに応じて変更) );
 ```
 
+##アンサンブルメンバ数とMPIプロセス数の関係
+MPI プロセス数はens_numの倍数であり、ランク群ごとに1メンバを担当することが前提である。
+また、関数の引数にて各ランクが values に渡すのは自分のメンバの変数配列であり、統計量はメンバ横断の MPI 集約で計算される。
 
 ## サンプルコード
-水素の電化密度分布をアンサンブルメンバ毎に変化させた分布を用いた時の統計量を可視化できるようになっている。
-非構造格子データ、構造格子データのサンプルコードはそれぞれ以下のディレクトリに配置している。
+水素の電荷密度分布をメンバ毎に変化させた分布を用いた時の統計量を可視化できるようになっている。
+非構造格子データ、構造格子データのサンプルコードはそれぞれ``Server/Example/C/s86_mpi_omp/ensemble``ディレクトリに配置している。
 
 | 対応タイプ       | ファイル名                                                             |
 |----------------|------------------------------------------------------------------|
@@ -44,8 +48,8 @@ result = ensemble_generate_particles( time_step, ens_num, dom,
 
 ### 計算条件
 
-各アンサンブルのメンバ数が大きくなるほど値は増大し、分布は縦に圧縮されるような分布。
-以下はアンサンブル数が0~4の画像でである。
+各アンサンブルのメンバ番号が大きくなるほど値は増大し、分布は縦に圧縮されるような分布。
+以下はメンバ番号が0~3の画像である。
 
 0アンサンブル
 <p align="center">
@@ -72,7 +76,7 @@ result = ensemble_generate_particles( time_step, ens_num, dom,
 
 ### コンパイル方法
 
-両者とも、Serverをビルドした時と同環境にてコンパイルできる。成功すると run　バイナリが生成される。
+両者とも、[Serverをビルドした時と同環境](#サーバのビルド)にてコンパイルできる。成功すると run バイナリが生成される。
 
 ## サンプルコードの可視化結果
 
