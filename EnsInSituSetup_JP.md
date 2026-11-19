@@ -33,7 +33,7 @@ result = ensemble_generate_particles( time_step, ens_num, dom,
                        connections, ncells, vismodule::VolumeObjectBase::CellType::Hexahedra (計算するセルタイプに応じて変更) );
 ```
 
-##アンサンブルメンバ数とMPIプロセス数の関係
+## アンサンブルメンバ数とMPIプロセス数の関係
 MPI プロセス数はens_numの倍数であり、ランク群ごとに1メンバを担当することが前提である。
 また、関数の引数にて各ランクが values に渡すのは自分のメンバの変数配列であり、統計量はメンバ横断の MPI 集約で計算される。
 
@@ -97,7 +97,7 @@ Transfer function
 |----------|----------|-----------|-----------|
 | Color(Opacity) Map | sqrt(q1*q2) | 0 | 255 |
 
-###　各メンバ分布
+### 各メンバ分布
 以下はメンバidが0~3の画像である。
 
 この時の可視化パラメータは共通して以下の通りである。
@@ -113,25 +113,25 @@ Transfer function
 | Color(Opacity) Map | sqrt(q1*q2) | 0 | 122 |
 
 
-0アンサンブル
+メンバid = 0
 <p align="center">
 <img src="img/EnsInSitu/ens0.png" alt="0アンサンブル" width=60%>
 </p>
 
 
-1アンサンブル
+メンバid = 1
 <p align="center">
 <img src="img/EnsInSitu/ens1.png" alt="1アンサンブル" width=60%>
 </p>
 
 
-2アンサンブル
+メンバid = 2
 <p align="center">
 <img src="img/EnsInSitu/ens2.png" alt="2アンサンブル" width=60%>
 </p>
 
 
-3アンサンブル
+メンバid = 3
 <p align="center">
 <img src="img/EnsInSitu/ens3.png" alt="3アンサンブル" width=60%>
 </p>
