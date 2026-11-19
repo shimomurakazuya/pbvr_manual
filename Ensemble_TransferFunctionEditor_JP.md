@@ -43,8 +43,8 @@ f = q1　かつLog10 Scale　チェックボックスON (算術平均の対数�
 
 ## Ensemble Transfer Functionカテゴリ
 このカテゴリについては各統計量ごとにそれぞれ以下の項目を設定できる。
-- **ColorMap**:variableにて指定された式の統計量に色付けするカラーマップを表示している。ダブルクリックでColor Map Editorを開く
-- **OpacityMap**:variableにて指定された式に対するオパシティマップを表示している。ダブルクリックでOpacity Map Editorを開く
+- **Color Map**:variableにて指定された式の統計量に色付けするカラーマップを表示している。ダブルクリックでColor Map Editorを開く
+- **Opacity Map**:variableにて指定された式に対するオパシティマップを表示している。ダブルクリックでOpacity Map Editorを開く
 - **Histogram**: EnsembleMinMaxカテゴリにて指定した最小最大値の範囲のヒストグラムが表示される
 
 ※ Color Map Editor の 使い方は[Color Map Editor](##Color_Map_Editor)参照  
@@ -54,7 +54,7 @@ f = q1　かつLog10 Scale　チェックボックスON (算術平均の対数�
 
 
 ## Ensemble MinMax カテゴリ
-- **User Defined MinMax**: Variableにて指定された式に対して、色関数/不透明度関数を割り当てる最小最大値を指定する 
-- **Server Side MinMax**: Variableにて指定された式のサーバ側で計算された統計量の最小最大値を表示する
+- **User Defined Min Max**: Variableにて指定された式に対して、色関数/不透明度関数を割り当てる最小最大値を指定する 
+- **Server Side Min Max**: Variableにて指定された式のサーバ側で計算された統計量の最小最大値を表示する
 
                 
