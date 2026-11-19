@@ -38,41 +38,15 @@ MPI プロセス数はens_numの倍数であり、ランク群ごとに1メン�
 また、関数の引数にて各ランクが values に渡すのは自分のメンバの変数配列であり、統計量はメンバ横断の MPI 集約で計算される。
 
 ## サンプルコード
-水素の電荷密度分布をメンバ毎に変化させた分布を用いた時の統計量を可視化できるようになっている。
+水素の電荷密度分布をメンバ毎に変化させた分布を用いた時の統計量を可視化できるようになっている。ただし、各アンサンブルで変化を持たせるために、z方向の依存性にメンバ別に変化を持たせている。
+メンバ数とMPIプロセス数の関係について、１メンバ/MPIで設定。
+
 非構造格子データ、構造格子データのサンプルコードはそれぞれ``Server/Example/C/s86_mpi_omp/ensemble``ディレクトリに配置している。
 
 | 対応タイプ       | ファイル名                                                             |
 |----------------|------------------------------------------------------------------|
 | 構造格子データ     |  ens_Hydrogen_struct   |
 | 非構造格子データ   |  ens_Hydrogen_unstruct     |
-
-### 計算条件
-
-各アンサンブルのメンバ番号が大きくなるほど値は増大し、分布は縦に圧縮されるような分布。
-以下はメンバ番号が0~3の画像である。
-
-0アンサンブル
-<p align="center">
-<img src="https://github.com/shimomurakazuya/pbvr_manual/blob/main/img/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%AF%E3%82%99ens0_rl27%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-07-13%2015.21.28.png" alt="0アンサンブル" width=60%>
-</p>
-
-
-1アンサンブル
-<p align="center">
-<img src="https://github.com/shimomurakazuya/pbvr_manual/blob/main/img/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%AF%E3%82%99ens1_rl27%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-07-13%2015.21.07.png" alt="1アンサンブル" width=60%>
-</p>
-
-
-2アンサンブル
-<p align="center">
-<img src="https://github.com/shimomurakazuya/pbvr_manual/blob/main/img/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%AF%E3%82%99ens2_rl27%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-07-13%2015.20.48.png" alt="2アンサンブル" width=60%>
-</p>
-
-
-3アンサンブル
-<p align="center">
-<img src="https://github.com/shimomurakazuya/pbvr_manual/blob/main/img/%E3%83%88%E3%83%AA%E3%83%9F%E3%83%B3%E3%82%AF%E3%82%99ens3_rl27%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-07-13%2015.22.34.png" alt="3アンサンブル" width=60%>
-</p>
 
 ### コンパイル方法
 
@@ -82,17 +56,82 @@ MPI プロセス数はens_numの倍数であり、ランク群ごとに1メン�
 
 ### 平均
 <p align="center">
-<img src="https://github.com/shimomurakazuya/pbvr_manual/blob/main/img/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-07-22%2014.47.40.png" alt="workload" width=60%>
+<img src="img/EnsInSitu/平均.png" alt="workload" width=60%>
 </p>
+
+Transfer function 
+<p align="center">
+<img src="img/EnsInSitu/平均 & 各アンサンブルのETF.png" alt="ETF" width=30%>
+</p>
+
+| Category |  Function | Range Min | Range Max |
+|----------|----------|-----------|-----------|
+| Color(Opacity) Map | sqrt(q1*q2) | 0 | 122 |
 
 ### 分散
 <p align="center">
-<img src="https://github.com/shimomurakazuya/pbvr_manual/blob/main/img/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-07-22%2014.52.03.png" alt="workload" width=60%>
+<img src="img/EnsInSitu/分散.png" alt="workload" width=60%>
 </p>
+
+
+Transfer function 
+<p align="center">
+<img src="img/EnsInSitu/分散のETF.png" alt="ETF" width=30%>
+</p>
+
+| Category |  Function | Range Min | Range Max |
+|----------|----------|-----------|-----------|
+| Color(Opacity) Map | sqrt(q1*q2) | 0 | 255 |
 
 ### 変動係数
 <p align="center">
-<img src="https://github.com/shimomurakazuya/pbvr_manual/blob/main/img/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-07-22%2014.53.51.png" alt="workload" width=60%>
+<img src="img/EnsInSitu/変動係数.png" alt="workload" width=60%>
 </p>
 
-                                                                                                            
+Transfer function 
+<p align="center">
+<img src="img/EnsInSitu/変動係数のETF.png" alt="ETF" width=30%>
+</p> 
+
+| Category |  Function | Range Min | Range Max |
+|----------|----------|-----------|-----------|
+| Color(Opacity) Map | sqrt(q1*q2) | 0 | 255 |
+
+###　各メンバ分布
+以下はメンバidが0~3の画像である。
+
+この時の可視化パラメータは共通して以下の通りである。
+
+0アンサンブル
+<p align="center">
+<img src="img/EnsInSitu/平均 & 各アンサンブルのETF.png" alt="ETF" width=40%>
+</p>
+
+
+| Category |  Function | Range Min | Range Max |
+|----------|----------|-----------|-----------|
+| Color(Opacity) Map | sqrt(q1*q2) | 0 | 122 |
+
+
+0アンサンブル
+<p align="center">
+<img src="img/EnsInSitu/ens0.png" alt="0アンサンブル" width=60%>
+</p>
+
+
+1アンサンブル
+<p align="center">
+<img src="img/EnsInSitu/ens1.png" alt="1アンサンブル" width=60%>
+</p>
+
+
+2アンサンブル
+<p align="center">
+<img src="img/EnsInSitu/ens2.png" alt="2アンサンブル" width=60%>
+</p>
+
+
+3アンサンブル
+<p align="center">
+<img src="img/EnsInSitu/ens3.png" alt="3アンサンブル" width=60%>
+</p>
