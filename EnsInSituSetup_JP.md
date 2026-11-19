@@ -102,7 +102,7 @@ Transfer function
 
 この時の可視化パラメータは共通して以下の通りである。
 
-0アンサンブル
+各メンバの可視化パラメータ図
 <p align="center">
 <img src="img/EnsInSitu/平均 & 各アンサンブルのETF.png" alt="ETF" width=40%>
 </p>
